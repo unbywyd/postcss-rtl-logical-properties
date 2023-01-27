@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "CommonJS",
+        "allowJs": true,
+        "checkJs": true,
+        "outDir": "./output/",
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "noImplicitOverride": true,
+        "noPropertyAccessFromIndexSignature": false,
+        "noImplicitReturns": true,
+        "esModuleInterop": false,
+        "noFallthroughCasesInSwitch": true,
+        "sourceMap": true,
+        "declaration": true,
+        "downlevelIteration": true,
+        "moduleResolution": "node",
+        "importHelpers": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "baseUrl": "./",
+        "paths": {
+            "@src/*": [
+                "./src/*"
+            ],
+            "@module/*": [
+                "./src/modules/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
