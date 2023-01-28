@@ -1,22 +1,26 @@
 const postcss = require('postcss');
 const chokidar = require('chokidar');
+
 const plugin = require('../output/src/index.js');
+
+
+
+const postcssRTL = require('postcss-rtl');
 
 // One-liner for current directory
 chokidar.watch(['../output/src/index.js']).on('all', (event, path) => {
     const css = `
        .test {
-            margin: 3px 10px 3px 2px;
-            padding-left: 10px;
-            left: 20px;
-            border-left-color: #FFF;
-            border-right: 1px solid #000;
-            border-bottom-left-radius: 20px;
-            float: left;
-            text-align: right;
+         padding-left: 10px;
+        border-right: 20px;
+        margin: 10px 1px 10px 29px;
+        transform: translateX(50%)
        }
     `
-    postcss([plugin])
+    
+    postcss([postcssRTL({
+      blacklist: plugin.ignoreDeclarationList
+    }), plugin])
         .process(css, { from: false })
         .then(result => {
            console.log(result.css)

@@ -20,6 +20,14 @@ export function horizontalDirectionValue(relativeDir: HorizontalDirection) {
   };
 }
 
+export function getIgnoreDeclarationList() {
+  const excludeProps = [Props.Border];
+  const filteredProps = Object.values(Props).filter(
+    (prop) => !excludeProps.includes(prop)
+  );
+  return filteredProps;
+}
+
 export function horizontalDirectionAxes(relativeDir: HorizontalDirection) {
   return (axes: Axes) => {
     if (

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.marginPaddingParser = exports.transformToDirectionValue = exports.inlinePropTransform = exports.verticalDirectionAxeos = exports.verticalDirectionValue = exports.horizontalDirectionAxes = exports.horizontalDirectionValue = void 0;
+exports.marginPaddingParser = exports.transformToDirectionValue = exports.inlinePropTransform = exports.verticalDirectionAxeos = exports.verticalDirectionValue = exports.horizontalDirectionAxes = exports.getIgnoreDeclarationList = exports.horizontalDirectionValue = void 0;
 const types_1 = require("./types");
 function horizontalDirectionValue(relativeDir) {
     return (axes) => {
@@ -12,6 +12,12 @@ function horizontalDirectionValue(relativeDir) {
     };
 }
 exports.horizontalDirectionValue = horizontalDirectionValue;
+function getIgnoreDeclarationList() {
+    const excludeProps = [types_1.Props.Border];
+    const filteredProps = Object.values(types_1.Props).filter((prop) => !excludeProps.includes(prop));
+    return filteredProps;
+}
+exports.getIgnoreDeclarationList = getIgnoreDeclarationList;
 function horizontalDirectionAxes(relativeDir) {
     return (axes) => {
         if ((axes == types_1.Axes.Right && relativeDir == types_1.HorizontalDirection.LeftToRight) ||

@@ -6,6 +6,12 @@ export enum DirectionValue {
   Start = "start",
   End = "end",
 }
+export type IgnoreDeclaration = any;
+
+export interface PluginMethods {
+  ignoreDeclarationList: Array<Props>
+}
+
 export enum HorizontalDirection {
   RightToLeft = "right-to-left",
   LeftToRight = "left-to-right",

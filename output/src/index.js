@@ -18,7 +18,7 @@ const plugin = (opts = {}) => {
         Declaration: {
             [types_1.Props.PaddingLeft]: (decl) => {
                 decl.assign({
-                    prop: inlineTransform(types_1.Props.Padding, types_1.Axes.Left),
+                    prop: inlineTransform(types_1.Props.Padding, types_1.Axes.Left)
                 });
             },
             [types_1.Props.PaddingRight]: (decl) => {
@@ -153,5 +153,6 @@ const plugin = (opts = {}) => {
     };
 };
 plugin.postcss = true;
+plugin.ignoreDeclarationList = (0, helpers_1.getIgnoreDeclarationList)();
 module.exports = plugin;
 //# sourceMappingURL=index.js.map

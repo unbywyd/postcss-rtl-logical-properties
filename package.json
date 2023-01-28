@@ -1,6 +1,6 @@
 {
   "name": "postcss-rtl-logical-properties",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This plugin is a PostCSS plugin that replaces supported horizontal direction properties (LTR/RTL) with logical CSS properties (start/end) to add RTL support.",
   "main": "output/src/index.js",
   "repository": {
@@ -14,10 +14,12 @@
     "properties"
   ],
   "devDependencies": {
-    "ts-loader": "^9.4.2",
     "chokidar": "^3.5.3",
-    "typescript": "^4.9.4",
-    "postcss": "^8.4.21"
+    "postcss": "^8.4.21",
+    "postcss-rtl": "^2.0.0",
+    "rtlcss": "^4.0.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4"
   },
   "scripts": {
     "dev": "tsc --watch",

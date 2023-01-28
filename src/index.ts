@@ -1,7 +1,8 @@
 import { name } from "../package.json";
 import { Declaration, PluginCreator } from "postcss";
-import { Axes, HorizontalDirection, Props, VerticalDirection } from "./types";
+import { Axes, HorizontalDirection, PluginMethods, Props, VerticalDirection } from "./types";
 import {
+  getIgnoreDeclarationList,
   horizontalDirectionValue,
   inlinePropTransform,
   marginPaddingParser,
@@ -15,9 +16,10 @@ import {
 
 namespace plugin {
   export type PluginOptions = {} 
+  export type ignoreDeclarationList = Array<Props>
 }
 
-const plugin: PluginCreator<plugin.PluginOptions> = (opts={}) => {
+const plugin: PluginCreator<plugin.PluginOptions> & PluginMethods = (opts={}) => {
   const options = {    
     hDirection: HorizontalDirection.LeftToRight,
     vDirection: VerticalDirection.TopToBottom,
@@ -33,7 +35,7 @@ const plugin: PluginCreator<plugin.PluginOptions> = (opts={}) => {
     Declaration: {
       [Props.PaddingLeft]: (decl) => {
         decl.assign({
-          prop: inlineTransform(Props.Padding, Axes.Left),
+          prop: inlineTransform(Props.Padding, Axes.Left)
         });
       },
       [Props.PaddingRight]: (decl) => {
@@ -194,6 +196,7 @@ const plugin: PluginCreator<plugin.PluginOptions> = (opts={}) => {
   };
 };
 plugin.postcss = true;
-
+plugin.ignoreDeclarationList = getIgnoreDeclarationList()
 
 export = plugin;
+

@@ -77,7 +77,6 @@ const result = postcss([
     }
 `);
 
-
 console.log(result.css);
 /* 
 .test {
@@ -86,6 +85,43 @@ console.log(result.css);
     margin-block: 10px;
     margin-inline: 29px 1px;
     transform: translateX(-50%)
+}
+*/
+```
+
+use with [postcss-rtl](https://www.npmjs.com/package/postcss-rtl)
+
+```
+const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
+const postcssRTL = require('postcss-rtl');
+
+const result = postcss([
+    postcssRTL({
+      blacklist: postcssRtlLogicalProperties.ignoreDeclarationList
+    }),
+    postcssRtlLogicalProperties()
+]).process(`
+    .test {
+        padding-left: 10px;
+        border-right: 20px;
+        margin: 10px 1px 10px 29px;
+        transform: translateX(50%)
+    }
+`);
+
+console.log(result.css);
+/* 
+.test {
+  padding-inline-start: 10px;
+  border-inline-end: 20px;
+  margin-block: 10px;
+  margin-inline: 1px 29px
+}
+[dir=ltr] .test {
+  transform: translateX(50%)
+}
+[dir=rtl] .test {
+  transform: translateX(-50%)
 }
 */
 ```
