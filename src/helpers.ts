@@ -97,9 +97,9 @@ export function marginPaddingParser(
 
     let props = [
       vDirValue(Axes.Top),
-      dirValue(Axes.Left),
-      vDirValue(Axes.Bottom),
       dirValue(Axes.Right),
+      vDirValue(Axes.Bottom),
+      dirValue(Axes.Left)
     ];
     let i = 0;
     const output: MarginPadding = props.reduce(
@@ -117,8 +117,8 @@ export function marginPaddingParser(
         return acc;
       },
       {
-        left: "0",
         top: "0",
+        left: "0",
         right: "0",
         bottom: "0",
       }

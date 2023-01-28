@@ -9,20 +9,20 @@ const postcssRTL = require('postcss-rtl');
 
 // One-liner for current directory
 chokidar.watch(['../output/src/index.js']).on('all', (event, path) => {
-    const css = `
+   const css = `
        .test {
          padding-left: 10px;
-        border-right: 20px;
-        margin: 10px 1px 10px 29px;
-        transform: translateX(50%)
+         border-right: 20px;
+         margin: 10px 1px 10px 29px;
+         transform: translateX(50%)
        }
     `
-    
-    postcss([postcssRTL({
+
+   postcss([plugin, postcssRTL({
       blacklist: plugin.ignoreDeclarationList
-    }), plugin])
-        .process(css, { from: false })
-        .then(result => {
-           console.log(result.css)
-        })
+   })])
+      .process(css, { from: false })
+      .then(result => {
+         console.log(result.css)
+      })
 });

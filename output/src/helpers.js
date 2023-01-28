@@ -76,9 +76,9 @@ function marginPaddingParser(relativeDir, vRelativeDir) {
             .map((val) => val);
         let props = [
             vDirValue(types_1.Axes.Top),
-            dirValue(types_1.Axes.Left),
-            vDirValue(types_1.Axes.Bottom),
             dirValue(types_1.Axes.Right),
+            vDirValue(types_1.Axes.Bottom),
+            dirValue(types_1.Axes.Left)
         ];
         let i = 0;
         const output = props.reduce((acc, prop, index) => {
@@ -97,8 +97,8 @@ function marginPaddingParser(relativeDir, vRelativeDir) {
             }
             return acc;
         }, {
-            left: "0",
             top: "0",
+            left: "0",
             right: "0",
             bottom: "0",
         });
