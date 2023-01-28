@@ -49,7 +49,7 @@ npm install postcss-rtl-logical-properties
 Then, you can use it in your PostCSS configuration file:
 
 ```
-const {plugin: postcssRtlLogicalProperties} = require('postcss-rtl-logical-properties');
+const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
 
 module.exports = {
   plugins: [
@@ -61,7 +61,7 @@ module.exports = {
 or use with [rtlcss](https://rtlcss.com)
 
 ```
-const { plugin: postcssRtlLogicalProperties } = require('postcss-rtl-logical-properties');
+const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
 var rtlcss = require('rtlcss');
 const postcss = require('postcss');
 

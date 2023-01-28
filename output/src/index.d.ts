@@ -5,5 +5,5 @@ import { PluginCreator } from "postcss";
 declare namespace plugin {
     type PluginOptions = {};
 }
-export declare const plugin: PluginCreator<plugin.PluginOptions>;
-export {};
+declare const plugin: PluginCreator<plugin.PluginOptions>;
+export = plugin;

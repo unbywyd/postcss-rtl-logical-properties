@@ -1,6 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.plugin = void 0;
 const package_json_1 = require("../package.json");
 const postcss_1 = require("postcss");
 const types_1 = require("./types");
@@ -154,6 +152,6 @@ const plugin = (opts = {}) => {
         },
     };
 };
-exports.plugin = plugin;
-exports.plugin.postcss = true;
+plugin.postcss = true;
+module.exports = plugin;
 //# sourceMappingURL=index.js.map

@@ -17,7 +17,7 @@ namespace plugin {
   export type PluginOptions = {} 
 }
 
-export const plugin: PluginCreator<plugin.PluginOptions> = (opts={}) => {
+const plugin: PluginCreator<plugin.PluginOptions> = (opts={}) => {
   const options = {    
     hDirection: HorizontalDirection.LeftToRight,
     vDirection: VerticalDirection.TopToBottom,
@@ -194,3 +194,6 @@ export const plugin: PluginCreator<plugin.PluginOptions> = (opts={}) => {
   };
 };
 plugin.postcss = true;
+
+
+export = plugin;

@@ -1,7 +1,6 @@
 const postcss = require('postcss');
 const chokidar = require('chokidar');
-const fs = require('fs');
-const { plugin } = require('../output/src/index.js');
+const plugin = require('../output/src/index.js');
 
 // One-liner for current directory
 chokidar.watch(['../output/src/index.js']).on('all', (event, path) => {
