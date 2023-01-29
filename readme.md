@@ -30,7 +30,6 @@ Right
 Float
 Clear
 TextAlight
-Border
 ```
 
 ## How it works
@@ -46,9 +45,9 @@ To use this plugin, you will need to have [PostCSS](https://postcss.org/) instal
 npm install postcss-rtl-logical-properties
 ```
 
-Then, you can use it in your PostCSS configuration file:
+Then, you can use it in your **PostCSS** configuration file:
 
-```
+```js
 const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
 
 module.exports = {
@@ -60,7 +59,7 @@ module.exports = {
 
 or use with [rtlcss](https://rtlcss.com)
 
-```
+```js
 const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
 var rtlcss = require('rtlcss');
 const postcss = require('postcss');
@@ -91,7 +90,7 @@ console.log(result.css);
 
 use with [postcss-rtl](https://www.npmjs.com/package/postcss-rtl)
 
-```
+```js
 const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
 const postcssRTL = require('postcss-rtl');
 
@@ -124,6 +123,37 @@ console.log(result.css);
     transform: translateX(-50%)
   }
 */
+```
+
+## Usage with Angular
+
+* First, configure the `ngx-build-plus` package, 
+* install the [angular-webpack-transformer](https://www.npmjs.com/package/angular-webpack-transformer) package 
+* install `postcss` and [postcss-loader](https://www.npmjs.com/package/postcss-loader) in your angular project `npm i postcss postcss-loader`
+* configurate `webpack.transformer.js` to add `postcss-loader` [see documentation](https://www.npmjs.com/package/angular-webpack-transformer)
+* configurate `postcss.config.js` to add this plugin
+
+```js
+// postcss.config.js
+const autoprefixer = require('autoprefixer');
+const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
+const postcssRTL = require('postcss-rtl');
+
+
+module.exports = () => {
+    return {
+        plugins: [
+            postcssRtlLogicalProperties(),
+            autoprefixer(),
+            postcssRTL({
+                blacklist: postcssRtlLogicalProperties.ignoreDeclarationList,
+                addPrefixToSelector: (selector, prefix) => {
+                    return `${prefix} ${selector}`;
+                }
+            })
+        ]
+    }
+}
 ```
 
 ## Plugin options
