@@ -34,7 +34,7 @@ TextAlight
 
 ## How it works
 
-This plugin does not replace other plugins such as *rtlcss* - it should be included in your PostCSS plugins before others to replace direction properties with logical properties in the first place.
+This plugin doesn't replace other plugins such as **postcss-rtl**, this plugin doesn't cover properties that require physical modification for example `transform`, `background` and etc. so both plugins can be used at the same time (see example below).
 By replacing direction properties with logical properties, this plugin helps to reduce the final weight of the CSS file and cover almost 80% of the standard properties.
 
 ## Usage
@@ -57,7 +57,9 @@ module.exports = {
 }
 ```
 
-or use with [rtlcss](https://rtlcss.com)
+## Usage with RTLCSS
+
+Only for one-way direction support
 
 ```js
 const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
@@ -88,7 +90,9 @@ console.log(result.css);
 */
 ```
 
-use with [postcss-rtl](https://www.npmjs.com/package/postcss-rtl)
+## Usage with POSTCSS-RTL
+
+For multi-direction support (LTR + RTL) relative to [dir] attribute, use with [postcss-rtl](https://www.npmjs.com/package/postcss-rtl)
 
 ```js
 const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
@@ -127,8 +131,12 @@ console.log(result.css);
 
 ## Usage with Angular
 
-* First, configure the `ngx-build-plus` package, 
-* install the [angular-webpack-transformer](https://www.npmjs.com/package/angular-webpack-transformer) package 
+To use postcss plugins you need to implement a postcss-loader for .css/.sass files and configure the postcss.config.js file.
+
+How to add a postcss-loader to angular?
+
+* First, configure the `ngx-build-plus` package to add the ability to edit the webpack configuration
+* install the [angular-webpack-transformer](https://www.npmjs.com/package/angular-webpack-transformer) package - this is a ngx-build-plus plugin which helps to inject transformers of webpack configuration asynchronously
 * install `postcss` and [postcss-loader](https://www.npmjs.com/package/postcss-loader) in your angular project `npm i postcss postcss-loader`
 * configurate `webpack.transformer.js` to add `postcss-loader` [see documentation](https://www.npmjs.com/package/angular-webpack-transformer)
 * configurate `postcss.config.js` to add this plugin
