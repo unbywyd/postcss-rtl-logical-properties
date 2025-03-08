@@ -6,7 +6,7 @@ import {
   Props,
   VerticalDirection,
   MarginPadding,
-} from "./types";
+} from "./types.js";
 
 export function horizontalDirectionValue(relativeDir: HorizontalDirection) {
   return (axes: Axes) => {
@@ -113,6 +113,9 @@ export function marginPaddingParser(
           acc[prop] = values[index];
         } else if (values.length == 3) {
           acc[prop] = values[index] || values[1];
+          if (prop === Axes.Left) {
+            acc[prop] = values[1];
+          }
         }
         return acc;
       },

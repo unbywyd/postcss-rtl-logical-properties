@@ -1,187 +1,138 @@
-# postcss-rtl-logical-properties
+# 🌍 postcss-rtl-logical-properties
 
-This plugin is a [PostCSS](https://postcss.org/) plugin that replaces supported horizontal direction properties (LTR/RTL) with logical CSS properties (start/end) to add RTL support.
+[![NPM Version](https://img.shields.io/npm/v/postcss-rtl-logical-properties.svg?style=flat-square)](https://www.npmjs.com/package/postcss-rtl-logical-properties)
+[![License](https://img.shields.io/npm/l/postcss-rtl-logical-properties.svg?style=flat-square)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-unbywyd-blue?style=flat-square&logo=github)](https://github.com/unbywyd/postcss-rtl-logical-properties)
 
-## Supported properties:
+✨ **postcss-rtl-logical-properties** is a **PostCSS plugin** that replaces physical CSS properties (`left`, `right`, `margin-left`, `padding-right`, etc.) with **logical CSS properties** (`start`, `end`, `margin-inline-start`, etc.) for **better RTL support** with reduced CSS size.
 
-The following properties are supported by this plugin:
+## 🚀 Features
 
-```
-Padding
-PaddingLeft
-PaddingRight
-Margin
-MarginLeft
-MarginRight
-BorderRight
-BorderLeft
-BorderLeftWidth
-BorderLeftColor
-BorderRightWidth
-BorderRightColor
-BorderLeftStyle
-BorderRightStyle
-BorderBottomLeftRadius
-BorderBottomRightRadius
-BorderTopLeftRadius
-BorderTopRightRadius
-Left
-Right
-Float
-Clear
-TextAlight
+- **Converts physical direction properties** to logical properties automatically.
+- **Reduces final CSS size** by eliminating redundant LTR/RTL selector duplication.
+- **Compatible with `postcss-rtl` and `rtlcss`** for comprehensive RTL support.
+- **ESM & CommonJS support** for modern environments.
+- **Zero dependencies** – lightweight and fast.
+
+## 📦 Installation
+
+```sh
+npm install postcss-rtl-logical-properties --save-dev
 ```
 
-## How it works
+## 🔧 Usage
 
-This plugin doesn't replace other plugins such as **postcss-rtl**, this plugin doesn't cover properties that require physical modification for example `transform`, `background` and etc. so both plugins can be used at the same time (see example below).
-By replacing direction properties with logical properties, this plugin helps to reduce the final weight of the CSS file and cover almost 80% of the standard properties.
+### ESM Example
 
-## Usage
-
-To use this plugin, you will need to have [PostCSS](https://postcss.org/) installed. Then, you can install `postcss-rtl-logical-properties` via **npm**:
-
-```
-npm install postcss-rtl-logical-properties
-```
-
-Then, you can use it in your **PostCSS** configuration file:
+Add the plugin to your PostCSS configuration:
 
 ```js
-const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
+import postcss from "postcss";
+import postcssRtlLogicalProperties from "postcss-rtl-logical-properties";
+import postcssRTL from "postcss-rtl";
+
+const css = `
+.foo {
+    margin-left: 10px;
+    margin-right: 20px;
+    border-radius: 5px 10px 15px 20px;
+    }
+`;
+
+postcss([
+  plugin,
+  postcssRTL({
+    blacklist: plugin.ignoreDeclarationList,
+  }),
+])
+  .process(css, { from: false })
+  .then((result) => {
+    console.log(result.css);
+  });
+```
+
+```js
+const postcssRtlLogicalProperties = require("postcss-rtl-logical-properties");
 
 module.exports = {
-  plugins: [
-    postcssRtlLogicalProperties()
-  ]
-}
+  plugins: [postcssRtlLogicalProperties()],
+};
 ```
 
-## Usage with RTLCSS
+### 🌍 Usage with `postcss-rtl`
 
-Only for one-way direction support
+For multi-direction support (LTR + RTL) using the `[dir]` attribute:
 
 ```js
-const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
-var rtlcss = require('rtlcss');
-const postcss = require('postcss');
+import postcss from "postcss";
+import plugin from "postcss-rtl-logical-properties";
+import postcssRTL from "postcss-rtl";
 
-const result = postcss([
-    postcssRtlLogicalProperties(),
-    rtlcss(),
-]).process(`
+const css = `
+.foo {
+    margin-left: 10px;
+    margin-right: 20px;
+    border-radius: 5px 10px 15px 20px;
+}
+`;
+
+postcss([plugin, postcssRTL({ blacklist: plugin.ignoreDeclarationList })])
+  .process(css, { from: false })
+  .then((result) => console.log(result.css));
+```
+
+### ⚡ CommonJS Example (One-Way Direction Support)
+
+```js
+const postcssRtlLogicalProperties = require("postcss-rtl-logical-properties");
+const rtlcss = require("rtlcss");
+const postcss = require("postcss");
+
+const result = postcss([postcssRtlLogicalProperties(), rtlcss()]).process(`
     .test {
         padding-left: 10px;
         border-right: 20px;
         margin: 10px 1px 10px 29px;
-        transform: translateX(50%)
     }
 `);
 
 console.log(result.css);
-/* 
-.test {
-    padding-inline-start: 10px;
-    border-inline-end: 20px;
-    margin-block: 10px;
-    margin-inline: 29px 1px;
-    transform: translateX(-50%)
-}
-*/
 ```
 
-## Usage with POSTCSS-RTL
+## 🛠 Plugin Options
 
-For multi-direction support (LTR + RTL) relative to [dir] attribute, use with [postcss-rtl](https://www.npmjs.com/package/postcss-rtl)
+| Option       | Description                                     | Default       |
+| ------------ | ----------------------------------------------- | ------------- |
+| `hDirection` | Sets the horizontal writing direction (LTR/RTL) | `LeftToRight` |
+| `vDirection` | Sets the vertical writing direction (TTB/BTB)   | `TopToBottom` |
 
-```js
-const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
-const postcssRTL = require('postcss-rtl');
+## 🎯 Supported Properties
 
-const result = postcss([
-    postcssRtlLogicalProperties(),
-    postcssRTL({
-      blacklist: postcssRtlLogicalProperties.ignoreDeclarationList
-    })
-]).process(`
-    .test {
-        padding-left: 10px;
-        border-right: 20px;
-        margin: 10px 1px 10px 29px;
-        transform: translateX(50%)
-    }
-`);
+This plugin replaces the following physical properties with their logical counterparts:
 
-console.log(result.css);
-/* 
-.test {
-    padding-inline-start: 10px;
-    border-inline-end: 20px;
-    margin-block: 10px;
-    margin-inline: 29px 1px
-  }
-  [dir=ltr] .test {
-    transform: translateX(50%)
-  }
-  [dir=rtl] .test {
-    transform: translateX(-50%)
-  }
-*/
-```
+- **Padding**: `padding-left`, `padding-right`
+- **Margin**: `margin-left`, `margin-right`
+- **Border**: `border-left`, `border-right`, `border-left-width`, `border-right-width`, `border-left-color`, `border-right-color`, `border-left-style`, `border-right-style`
+- **Radius**: `border-bottom-left-radius`, `border-bottom-right-radius`, `border-top-left-radius`, `border-top-right-radius`
+- **Positioning**: `left`, `right`
+- **Float & Clear**: `float`, `clear`
+- **Text Alignment**: `text-align`
 
-## Usage with Angular
+## 🌍 Browser Support
 
-To use postcss plugins you need to implement a postcss-loader for .css/.sass files and configure the postcss.config.js file.
+✅ **Global support:** ~89% ([Can I Use](https://caniuse.com/css-logical-props))
 
-How to add a postcss-loader to angular?
+❗ **Note**: This plugin does **not** transform complex properties like `transform`, `background-position`, or `border-radius`. For these, use `rtlcss`.
 
-* First, configure the `ngx-build-plus` package to add the ability to edit the webpack configuration
-* install the [angular-webpack-transformer](https://www.npmjs.com/package/angular-webpack-transformer) package - this is a ngx-build-plus plugin which helps to inject transformers of webpack configuration asynchronously
-* install `postcss` and [postcss-loader](https://www.npmjs.com/package/postcss-loader) in your angular project `npm i postcss postcss-loader`
-* configurate `webpack.transformer.js` to add `postcss-loader` [see documentation](https://www.npmjs.com/package/angular-webpack-transformer)
-* configurate `postcss.config.js` to add this plugin
+## 🤔 Why Use This Plugin?
 
-```js
-// postcss.config.js
-const autoprefixer = require('autoprefixer');
-const postcssRtlLogicalProperties = require('postcss-rtl-logical-properties');
-const postcssRTL = require('postcss-rtl');
+Many RTL processors like `postcss-rtlcss` generate **duplicate selectors** with `[dir]` attributes, significantly increasing CSS file size. This plugin **eliminates redundant rules** by leveraging **native logical properties**, reducing final CSS size while maintaining full RTL support.
 
+## 📝 License
 
-module.exports = () => {
-    return {
-        plugins: [
-            postcssRtlLogicalProperties(),
-            autoprefixer(),
-            postcssRTL({
-                blacklist: postcssRtlLogicalProperties.ignoreDeclarationList,
-                addPrefixToSelector: (selector, prefix) => {
-                    return `${prefix} ${selector}`;
-                }
-            })
-        ]
-    }
-}
-```
+MIT License © [Artyom Gorlovetskiy](https://unbywyd.com)
 
-## Plugin options
-`hDirection`: This option allows you to change the standard direction from LTR to RTL (default: `HorizontalDirection.LeftToRight`)
-`vDirection`: This option allows you to change the direction from TopToBottom to BottomToTop (default: `VerticalDirection.TopToBottom`)
+## 🔗 Links
 
-## Browser support
-
-This plugin has good browser support and is worth using. According to [Can I Use](https://caniuse.com/css-logical-props), global support is at 89.12%.
-
-**Note** that this plugin does not support complex properties like *transform* or background-position, border-radius and others, for this you will still use rtlcss.
-
-## Why is this needed?
-
-As you know, plugins such as **postcss-rtlcss** process all the properties that are responsible for the direction and generate their own selectors for different versions of LTR and RTL with the addition of the [DIR] attribute before the selector, why is that bad? - This generates duplicates and ultimately affects the size of the file.
-
-### This plugin fully implements rtl support?
-
-* No, [you can see](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties) the list of properties that are already supported, this plugin implements this support, but only towards the horizontal writing mode. 
-
-## Conclusion
-
-`postcss-rtl-logical-properties` - is a useful plugin for adding RTL support to your CSS, reducing the final file size and covering a majority of standard properties.
+- 📦 **NPM**: [postcss-rtl-logical-properties](https://www.npmjs.com/package/postcss-rtl-logical-properties)
+- 🏗 **GitHub**: [unbywyd/postcss-rtl-logical-properties](https://github.com/unbywyd/postcss-rtl-logical-properties)

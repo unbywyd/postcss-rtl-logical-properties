@@ -1,4 +1,4 @@
-import { Axes, HorizontalDirection, DirectionValue, Props, VerticalDirection, MarginPadding } from "./types";
+import { Axes, HorizontalDirection, DirectionValue, Props, VerticalDirection, MarginPadding } from "./types.js";
 export declare function horizontalDirectionValue(relativeDir: HorizontalDirection): (axes: Axes) => DirectionValue;
 export declare function getIgnoreDeclarationList(): Props[];
 export declare function horizontalDirectionAxes(relativeDir: HorizontalDirection): (axes: Axes) => Axes.Right | Axes.Left;
@@ -7,3 +7,4 @@ export declare function verticalDirectionAxeos(relativeDir: VerticalDirection): 
 export declare function inlinePropTransform(relativeDir: HorizontalDirection): (prop: Props, axes: Axes, suffix?: string) => string;
 export declare function transformToDirectionValue(relativeDir: HorizontalDirection): (value: any) => any;
 export declare function marginPaddingParser(relativeDir: HorizontalDirection, vRelativeDir: VerticalDirection): (value: string) => [number, MarginPadding];
+//# sourceMappingURL=helpers.d.ts.map

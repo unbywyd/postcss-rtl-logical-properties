@@ -38,6 +38,7 @@ export declare enum Props {
     BorderRightWidth = "border-right-width",
     BorderRightColor = "border-right-color",
     BorderLeftStyle = "border-left-style",
+    BorderRadius = "border-radius",
     BorderRightStyle = "border-right-style",
     BorderBottomLeftRadius = "border-bottom-left-radius",
     BorderBottomRightRadius = "border-bottom-right-radius",
@@ -47,8 +48,10 @@ export declare enum Props {
     Right = "right",
     Float = "float",
     Clear = "clear",
-    TextAlight = "text-align",
-    Border = "border"
+    TextAlign = "text-align",
+    Border = "border",
+    Top = "top",
+    Bottom = "bottom"
 }
 export type MarginPadding = {
     [key in Axes]: string;
@@ -57,3 +60,4 @@ export interface PluginOptions {
     hDirection?: HorizontalDirection;
     vDirection?: VerticalDirection;
 }
+//# sourceMappingURL=types.d.ts.map

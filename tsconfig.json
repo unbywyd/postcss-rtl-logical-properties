@@ -1,33 +1,19 @@
 {
     "compilerOptions": {
         "target": "ES2022",
-        "module": "CommonJS",
-        "allowJs": true,
-        "checkJs": true,
+        "module": "NodeNext",
+        "noImplicitAny": true,
         "outDir": "./output/",
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "noImplicitOverride": true,
-        "noPropertyAccessFromIndexSignature": false,
-        "noImplicitReturns": true,
-        "esModuleInterop": false,
-        "noFallthroughCasesInSwitch": true,
-        "sourceMap": true,
         "declaration": true,
-        "downlevelIteration": true,
-        "moduleResolution": "node",
-        "importHelpers": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": false,
+        "strict": false,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "moduleResolution": "NodeNext",
+        "strictNullChecks": true,
         "skipLibCheck": true,
-        "resolveJsonModule": true,
-        "baseUrl": "./",
-        "paths": {
-            "@src/*": [
-                "./src/*"
-            ]
-        }
+        "baseUrl": "./"
     },
     "include": [
         "src/**/*"
